@@ -1,0 +1,1845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fff;
+    scroll-behavior: smooth;
+}
+
+/* Focus styles for accessibility */
+*:focus {
+    outline: 2px solid #8B5CF6;
+    outline-offset: 2px;
+}
+
+/* Smooth transitions for all interactive elements */
+button, a, input, .product-card, .category-card, .feature-card {
+    transition: all 0.3s ease;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header Styles */
+.header {
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 20px;
+}
+
+.nav-brand .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+ 
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #8B5CF6, #EC4899);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+.nav-menu ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #374151;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: #8B5CF6;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.search-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-bar i {
+    position: absolute;
+    left: 15px;
+    color: #9ca3af;
+}
+
+.search-bar input {
+    padding: 12px 15px 12px 45px;
+    border: 2px solid #e5e7eb;
+    border-radius: 25px;
+    width: 250px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.search-bar input:focus {
+    outline: none;
+    border-color: #8B5CF6;
+}
+
+.cart-icon {
+    position: relative;
+    font-size: 1.5rem;
+    color: #374151;
+    cursor: pointer;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #EC4899;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+}
+.cart-count.show {
+    display: flex;
+}
+
+/* Hero Section */
+.hero {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #fef1ff 0%, hwb(342 96% 0%) 100%);
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: #1f2937;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #8B5CF6, #EC4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    color: #6b7280;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.btn {
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    justify-content: center;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #8B5CF6, #EC4899);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
+}
+
+.btn-outline {
+    background: transparent;
+    color: #374151;
+    border: 2px solid #d1d5db;
+}
+
+.btn-outline:hover {
+    background: #f9fafb;
+    border-color: #8B5CF6;
+    color: #8B5CF6;
+}
+
+.hero-stats {
+    display: flex;
+    gap: 3rem;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.hero-image {
+    position: relative;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Section Headers */
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1rem;
+}
+
+.section-header p {
+    font-size: 1.1rem;
+    color: #6b7280;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Categories Section */
+.categories {
+    padding: 5rem 0;
+    background: #fff;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.category-card {
+    padding: 2rem;
+    border-radius: 20px;
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    transform: scale(1.1);
+}
+
+.category-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 1.5rem;
+}
+
+.category-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.category-card p {
+    font-size: 1rem;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+/* Featured Products Section */
+.featured-products {
+    padding: 5rem 0;
+    background: #f8fafc;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.product-card {
+    background: white;
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+}
+
+.product-badge.best-seller {
+    background: linear-gradient(135deg, #10B981, #059669);
+}
+
+.product-badge.new {
+    background: linear-gradient(135deg, #06B6D4, #0891B2);
+}
+
+.product-badge.sale {
+    background: linear-gradient(135deg, #EF4444, #DC2626);
+}
+
+.product-badge.featured {
+    background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+}
+
+.product-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #1f2937;
+}
+
+.product-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.stars {
+    color: #fbbf24;
+}
+
+.rating-text {
+    font-size: 0.9rem;
+    color: #6b7280;
+}
+
+.product-price {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.current-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.original-price {
+    font-size: 1.1rem;
+    color: #9ca3af;
+    text-decoration: line-through;
+}
+
+.btn-add-cart {
+    width: 100%;
+    justify-content: center;
+}
+
+.view-all-btn {
+    text-align: center;
+}
+
+/* Why Choose Section */
+.why-choose {
+    padding: 5rem 0;
+    background: #fff;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.feature-card {
+    text-align: center;
+    padding: 2rem;
+    border-radius: 20px;
+    background: #f8fafc;
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    background: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #8B5CF6, #EC4899);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+    color: white;
+}
+
+.feature-card h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #1f2937;
+}
+
+.feature-card p {
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+/* Newsletter Section */
+.newsletter {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #8B5CF6, #EC4899);
+    color: white;
+}
+
+.newsletter-content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.newsletter h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.newsletter p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 1rem;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    outline: none;
+}
+
+.newsletter-form input::placeholder {
+    color: #9ca3af;
+}
+
+.btn-newsletter {
+    background: #EC4899;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-newsletter:hover {
+    background: #be185d;
+}
+
+/* Footer */
+.footer {
+    background: linear-gradient(135deg, #1e1b4b, #312e81);
+    color: white;
+    padding: 4rem 0 2rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-logo .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+.footer-logo .logo-icon {
+    font-size: 2rem;
+    background: linear-gradient(135deg, #8B5CF6, #EC4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.footer-logo .logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+.footer-section p {
+    color: #cbd5e1;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-links a {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.social-links a:hover {
+    background: #8B5CF6;
+}
+
+.footer-section h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a {
+    color: #cbd5e1;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: #8B5CF6;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #cbd5e1;
+}
+
+.contact-item i {
+    color: #8B5CF6;
+    width: 20px;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-bottom-left p {
+    color: #cbd5e1;
+    margin: 0;
+}
+
+.footer-bottom-right {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.footer-bottom-right a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom-right a:hover {
+    color: #8B5CF6;
+}
+
+/* CSS-only interactive features */
+.btn:active {
+    transform: scale(0.95);
+}
+
+.btn-add-cart:active {
+    background: linear-gradient(135deg, #10B981, #059669);
+}
+
+.btn-add-cart:active::after {
+    content: " ✓";
+}
+
+/* Cart counter animation */
+.cart-icon:active {
+    transform: scale(1.2);
+}
+
+/* Mobile menu toggle */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #374151;
+    cursor: pointer;
+}
+
+/* Newsletter form validation styling */
+.newsletter-form input:invalid {
+    border: 2px solid #EF4444;
+}
+
+.newsletter-form input:valid {
+    border: 2px solid #10B981;
+}
+
+/* Search bar focus effect */
+.search-bar input:focus {
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header .container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .nav-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .search-bar input {
+        width: 200px;
+    }
+    
+    .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+    }
+    
+    .hero-stats {
+        justify-content: center;
+        gap: 2rem;
+    }
+    
+    .categories-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-bottom-right {
+        justify-content: center;
+    }
+    
+    /* Mobile navigation */
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    .nav-menu {
+        display: none;
+    }
+    
+    .nav-menu.mobile-active {
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+    
+    .nav-menu.mobile-active ul {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    .newsletter h2 {
+        font-size: 2rem;
+    }
+    
+    .btn {
+        padding: 12px 24px;
+        font-size: 14px;
+    }
+}
+
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paint Splash - Premium Art Supplies</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-brand">
+                <div class="logo">
+                    <img src="images/paint splash logo-01.png" width="50"class="logo-icon">
+                    <span class="logo-text">Paint Splash</span>
+                </div>
+            </div>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#colors">Colors</a></li>
+                    <li><a href="#brushes">Brushes</a></li>
+                    <li><a href="#canvas">Canvas</a></li>
+                    <li><a href="#accessories">Accessories</a></li>
+               
+                </ul>
+            </nav>
+            
+            <div class="nav-actions">
+                <form class="search-bar" action="#" method="get">
+                    <i class="fas fa-search"></i>
+                    <input type="search" name="q" placeholder="Search paint supplies..." required>
+                </form>
+                <div class="cart-icon">
+                    <a href="cart.html" style="color: inherit; text-decoration: none; display: flex; align-items: center;">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cart-count"></span>
+                    </a>
+                </div>
+                 <div class="cart-icon" id="profile-icon">
+                    <i class="fas fa-user"></i>
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        Splash Your <span class="gradient-text">Creative Spirit</span>
+                    </h1>
+                    <p class="hero-description">
+                        Discover premium painting supplies that bring your imagination to life. From vibrant paints to professional brushes, we have everything you need to create masterpieces.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#featured-products" class="btn btn-primary">Shop Now</a>
+                        <a href="#categories" class="btn btn-outline">View Catalog</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Products</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">50K+</span>
+                            <span class="stat-label">Happy Artists</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">99%</span>
+                            <span class="stat-label">Satisfaction</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://cdn.pixabay.com/photo/2024/10/25/11/44/ai-generated-9148695_1280.jpg" alt="Artist hand with paintbrush">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <div class="section-header">
+                <h2>Explore Our Categories</h2>
+                <p>Discover everything you need to bring your artistic vision to life. From professional-grade paints to essential tools and accessories.</p>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card" style="background: linear-gradient(135deg, #8B5CF6, #A855F7);">
+                    <img src="https://img.kwcdn.com/product/open/ceb5ecb8d6ac478ea8ce9ce3a67654df-goods.jpeg?imageMogr2/auto-orient%7CimageView2/2/w/800/q/70/format/webp" alt="Acrylic Paints">
+                    <h3>Acrylic Paints</h3>
+                    <p>Vibrant, fast-drying paints perfect for any surface.</p>
+                </div>
+                <div class="category-card" style="background: linear-gradient(135deg, #027f95, #0891B2);">
+                    <img src="https://cdn.shopify.com/s/files/1/1744/3435/collections/ambiance_aqua_XF.jpg?v=1538086089" alt="Watercolors">
+                    <h3>Watercolors</h3>
+                    <p>Transparent, luminous colors for delicate artwork.</p>
+                </div>
+                <div class="category-card" style="background: linear-gradient(135deg, #EF4444, #F97316);">
+                    <img src="https://images.unsplash.com/photo-1550618949-ab6a03032c7e?q=80&w=1174&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Paint Brushes">
+                    <h3>Paint Brushes</h3>
+                    <p>Professional brushes for every painting technique.</p>
+                </div>
+                <div class="category-card" style="background: linear-gradient(135deg, #10B981, #059669);">
+                    <img src="https://img.freepik.com/free-photo/top-view-copy-space-canvas-with-dirty-color-palette_23-2148660914.jpg?semt=ais_incoming&w=740&q=80" alt="Canvas & Surfaces">
+                    <h3>Canvas & Surfaces</h3>
+                    <p>High-quality canvases and painting surfaces.</p>
+                </div>
+                <div class="category-card" style="background: linear-gradient(135deg, #EC4899, #f16f98);">
+                    <img src="https://www.samanthasbell.com/wp-content/uploads/2015/09/file1171347376152-1024x792.jpg" alt="Mixing Palettes">
+                    <h3>Mixing Palettes</h3>
+                    <p>Essential tools for color mixing and blending.</p>
+                </div>
+                <div class="category-card" style="background: linear-gradient(135deg, #F97316, #dc8c01);">
+                    <img src="https://graphicdesignjunction.com/wp-content/uploads/2024/06/logo_design_process.jpg" alt="Art Accessories">
+                    <h3>Art Accessories</h3>
+                    <p>Complete your studio with essential accessories.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="featured-products" id="featured-products">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Products</h2>
+                <p>Hand-picked premium art supplies loved by artists worldwide. Quality materials to elevate your creative journey.</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-badge best-seller">Best Seller</div>
+                    <img src="https://m.media-amazon.com/images/I/71udzha7W0L._UF894,1000_QL80_.jpg" alt="Professional Acrylic Paint Set">
+                    <h3>Professional Brush Pen Set</h3>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="rating-text">4.8 (324 reviews)</span>
+                    </div>
+                    <div class="product-price">
+                        <span class="current-price">$89.99</span>
+                        <span class="original-price">$119</span>
+                    </div>
+                    <a href="mailto:hello@artcraftstudio.com?subject=Add to Cart Request" class="btn btn-primary btn-add-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </a>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-badge new">New</div>
+                    <img src="https://thefrugalcrafter.wordpress.com/wp-content/uploads/2018/11/45527659_10212863285562356_2442502881388003328_o.jpg" alt="Watercolor Paint Collection">
+                    <h3>Watercolor Paint Collection</h3>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="rating-text">4.7 (196 reviews)</span>
+                    </div>
+                    <div class="product-price">
+                        <span class="current-price">$64.99</span>
+                    </div>
+                    <a href="mailto:hello@artcraftstudio.com?subject=Add to Cart Request" class="btn btn-primary btn-add-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </a>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-badge sale">Sale</div>
+                    <img src="https://rukminim2.flixcart.com/image/850/1000/kw9krrk0/paint-brush/r/d/w/paint-brush-set-10-pcs-nylon-hair-art-paint-brushes-for-acrylic-original-imag8znuthsbghak.jpeg?q=90&crop=false" alt="Artist Brush Set Premium">
+                    <h3>Artist Brush Set Premium</h3>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="rating-text">4.9 (195 reviews)</span>
+                    </div>
+                    <div class="product-price">
+                        <span class="current-price">$49.99</span>
+                        <span class="original-price">$69</span>
+                    </div>
+                    <a href="mailto:hello@artcraftstudio.com?subject=Add to Cart Request" class="btn btn-primary btn-add-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </a>
+                </div>
+                
+                <div class="product-card">
+                    <img src="https://m.media-amazon.com/images/S/aplus-media-library-service-media/63b89773-eb4e-4b7c-86a2-e4aedb289cd1.__CR0,0,970,600_PT0_SX970_V1___.jpg" alt="Acrylic Paint Set">
+                    <h3>Acrylic Paint Set</h3>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="rating-text">4.6 (89 reviews)</span>
+                    </div>
+                    <div class="product-price">
+                        <span class="current-price">$34.99</span>
+                    </div>
+                    <a href="mailto:hello@paintsplash.com?subject=Add to Cart Request" class="btn btn-primary btn-add-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </a>
+                </div>
+                
+                <div class="product-card">
+                    <img src="https://m.media-amazon.com/images/I/81+RQghMvdL._AC_CR0%2C0%2C0%2C0_SX615_SY462_.jpg" alt="Premium Colored Pencil">
+                    <h3>Premium Colored Pencil 72 pc</h3>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="rating-text">4.5 (243 reviews)</span>
+                    </div>
+                    <div class="product-price">
+                        <span class="current-price">$19.99</span>
+                    </div>
+                    <a href="mailto:hello@paintsplash.com?subject=Add to Cart Request" class="btn btn-primary btn-add-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </a>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-badge featured">Featured</div>
+                    <img src="https://static.wixstatic.com/media/9200d4_1195575fd23442939624aa925767658c~mv2.jpg/v1/fill/w_980,h_595,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/9200d4_1195575fd23442939624aa925767658c~mv2.jpg" alt="Complete Art Supplies Kit">
+                    <h3>Complete Art Supplies Kit</h3>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="rating-text">4.8 (421 reviews)</span>
+                    </div>
+                    <div class="product-price">
+                        <span class="current-price">$149.99</span>
+                        <span class="original-price">$199</span>
+                    </div>
+                    <a href="mailto:hello@paintsplash.com?subject=Add to Cart Request" class="btn btn-primary btn-add-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </a>
+                </div>
+            </div>
+            <div class="view-all-btn">
+                <a href="#categories" class="btn btn-outline">View All Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Section -->
+    <section class="why-choose" id="urwashi">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose Paint Splash?</h2>
+                <p>We're committed to providing artists with the best materials, service, and support for their creative journey.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>Free Shipping</h3>
+                    <p>Free shipping on orders over $50. Get your art supplies delivered to your doorstep.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <!-- <i class="fas fa-shield-check"></i> -->
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <h3>Quality Guarantee</h3>
+                    <p>100% authentic products with quality guarantee. Return within 30 days if not satisfied.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Fast Delivery</h3>
+                    <p>Express delivery available. Most orders shipped within 24 hours of purchase.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Premium Brands</h3>
+                    <p>Curated selection of premium art supply brands trusted by professional artists.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3>Expert Support</h3>
+                    <p>Get advice from our team of professional artists and art supply experts.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Art Community</h3>
+                    <p>Join our vibrant community of artists and share your creative journey with us.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Stay Inspired</h2>
+                <p>Subscribe to our newsletter for exclusive deals, art tips, tutorials and the latest product updates.</p>
+                <form class="newsletter-form" action="mailto:hello@paintsplash.com" method="post" enctype="text/plain">
+                    <input type="email" name="email" placeholder="Enter your email address" required>
+                    <button type="submit" class="btn btn-newsletter">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div class="logo">
+                            <img src="images/paint splash logo-01.png" alt="Paint Splash Logo" width="50"class="logo-icon">
+                            <span class="logo-text">Paint Splash</span>
+                        </div>
+                    </div>
+                    <p>Your premier destination for high-quality painting supplies. Empowering artists worldwide to create their masterpieces.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#shop">Shop All</a></li>
+                        <li><a href="#new">New Arrivals</a></li>
+                        <li><a href="#best">Best Sellers</a></li>
+                        <li><a href="#sale">Sale</a></li>
+                        <li><a href="#tutorials">Painting Tutorials</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="#acrylic">Acrylic Paints</a></li>
+                        <li><a href="#watercolor">Watercolors</a></li>
+                        <li><a href="#brushes">Paint Brushes</a></li>
+                        <li><a href="#canvas">Canvas</a></li>
+                        <li><a href="#accessories">Accessories</a></li>
+                        <li><a href="#gifts">Gift Sets</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Art Street, Creative District, CA 90210</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>hello@paintsplash.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2025 Paint Splash. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                    <a href="#shipping">Shipping Info</a>
+                    <a href="#returns">Returns</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Function to inject CSS styles dynamically
+        function injectSignInStyles() {
+            const style = document.createElement('style');
+            style.textContent = `
+                .signin-modal {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 10000;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: opacity 0.3s ease, visibility 0.3s ease;
+                }
+                .signin-modal.active {
+                    opacity: 1;
+                    visibility: visible;
+                }
+                .signin-modal-overlay {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    backdrop-filter: blur(4px);
+                }
+                .signin-container {
+                    position: relative;
+                    background-color: white;
+                    padding: 40px;
+                    border-radius: 12px;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                    width: 100%;
+                    max-width: 360px;
+                    box-sizing: border-box;
+                    z-index: 10001;
+                    transform: scale(0.9);
+                    transition: transform 0.3s ease;
+                }
+                .signin-modal.active .signin-container {
+                    transform: scale(1);
+                }
+                .signin-close {
+                    position: absolute;
+                    top: 15px;
+                    right: 15px;
+                    background: none;
+                    border: none;
+                    font-size: 24px;
+                    color: #999;
+                    cursor: pointer;
+                    width: 30px;
+                    height: 30px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 50%;
+                    transition: all 0.3s ease;
+                }
+                .signin-close:hover {
+                    background-color: #f0f0f0;
+                    color: #333;
+                }
+                .form-group {
+                    margin-bottom: 20px;
+                }
+                .form-group label {
+                    display: block;
+                    margin-bottom: 8px;
+                    color: #333;
+                    font-weight: 500;
+                }
+                .form-group input {
+                    width: 100%;
+                    padding: 12px 16px;
+                    border: 1px solid #ddd;
+                    border-radius: 8px;
+                    font-size: 16px;
+                    box-sizing: border-box;
+                    transition: border-color 0.3s;
+                }
+                .form-group input::placeholder {
+                    color: #bbb;
+                }
+                .form-group input:focus {
+                    outline: none;
+                    border-color: #a060ff;
+                }
+                .signin-btn {
+                    width: 100%;
+                    padding: 14px;
+                    border: none;
+                    border-radius: 25px;
+                    background: linear-gradient(90deg, #a060ff, #f857a6);
+                    color: white;
+                    font-size: 16px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    margin-top: 10px;
+                    transition: opacity 0.3s;
+                }
+                .signin-btn:hover {
+                    opacity: 0.9;
+                }
+                .links-container {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-top: 25px;
+                }
+                .links-container a {
+                    color: #555;
+                    text-decoration: underline;
+                    font-size: 14px;
+                }
+                .links-container a:hover {
+                    color: #000;
+                }
+                @media (max-width: 480px) {
+                    .signin-container {
+                        padding: 30px 20px;
+                        margin: 20px;
+                        max-width: calc(100% - 40px);
+                    }
+                }
+                /* Register Modal Styles */
+                .register-modal {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 10000;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: opacity 0.3s ease, visibility 0.3s ease;
+                }
+                .register-modal.active {
+                    opacity: 1;
+                    visibility: visible;
+                }
+                .register-modal-overlay {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    backdrop-filter: blur(4px);
+                }
+                .register-container {
+                    position: relative;
+                    background: linear-gradient(180deg, #fff0f5, #f8f8f8);
+                    padding: 40px;
+                    border-radius: 12px;
+                    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+                    width: 100%;
+                    max-width: 400px;
+                    box-sizing: border-box;
+                    z-index: 10001;
+                    transform: scale(0.9);
+                    transition: transform 0.3s ease;
+                }
+                .register-modal.active .register-container {
+                    transform: scale(1);
+                }
+                .register-close {
+                    position: absolute;
+                    top: 15px;
+                    right: 15px;
+                    background: none;
+                    border: none;
+                    font-size: 24px;
+                    color: #999;
+                    cursor: pointer;
+                    width: 30px;
+                    height: 30px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 50%;
+                    transition: all 0.3s ease;
+                }
+                .register-close:hover {
+                    background-color: #f0f0f0;
+                    color: #333;
+                }
+                .register-container .form-group {
+                    margin-bottom: 22px;
+                }
+                .register-container .form-group label {
+                    display: block;
+                    margin-bottom: 8px;
+                    color: #333;
+                    font-weight: 500;
+                    font-size: 15px;
+                }
+                .register-container .form-group input {
+                    width: 100%;
+                    padding: 13px 18px;
+                    border: 1px solid #eee;
+                    border-radius: 9px;
+                    font-size: 16px;
+                    box-sizing: border-box;
+                    transition: border-color 0.3s, box-shadow 0.3s;
+                    background-color: #fff;
+                }
+                .register-container .form-group input::placeholder {
+                    color: #ccc;
+                }
+                .register-container .form-group input:focus {
+                    outline: none;
+                    border-color: #f8a4dc;
+                    box-shadow: 0 0 0 3px rgba(248, 164, 220, 0.2);
+                }
+                .register-btn {
+                    width: 100%;
+                    padding: 15px;
+                    border: none;
+                    border-radius: 28px;
+                    background: linear-gradient(90deg, #a060ff, #f857a6);
+                    color: white;
+                    font-size: 17px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    margin-top: 20px;
+                    transition: transform 0.2s, box-shadow 0.2s;
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+                }
+                .register-btn:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+                }
+                @media (max-width: 480px) {
+                    .register-container {
+                        padding: 30px 20px;
+                        margin: 20px;
+                        max-width: calc(100% - 40px);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Function to create the sign-in modal HTML structure
+        function createSignInModal() {
+            // Create modal container
+            const modal = document.createElement('div');
+            modal.className = 'signin-modal';
+            modal.id = 'signin-modal';
+
+            // Create overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'signin-modal-overlay';
+            overlay.id = 'signin-overlay';
+
+            // Create container
+            const container = document.createElement('div');
+            container.className = 'signin-container';
+
+            // Create close button
+            const closeBtn = document.createElement('button');
+            closeBtn.className = 'signin-close';
+            closeBtn.id = 'signin-close';
+            closeBtn.innerHTML = '<i class="fas fa-times"></i>';
+
+            // Create form
+            const form = document.createElement('form');
+            form.id = 'signin-form';
+
+            // Create email field
+            const emailGroup = document.createElement('div');
+            emailGroup.className = 'form-group';
+            const emailLabel = document.createElement('label');
+            emailLabel.setAttribute('for', 'email');
+            emailLabel.textContent = 'Email';
+            const emailInput = document.createElement('input');
+            emailInput.type = 'email';
+            emailInput.id = 'email';
+            emailInput.name = 'email';
+            emailInput.placeholder = 'Value';
+            emailInput.required = true;
+            emailGroup.appendChild(emailLabel);
+            emailGroup.appendChild(emailInput);
+
+            // Create password field
+            const passwordGroup = document.createElement('div');
+            passwordGroup.className = 'form-group';
+            const passwordLabel = document.createElement('label');
+            passwordLabel.setAttribute('for', 'password');
+            passwordLabel.textContent = 'Password';
+            const passwordInput = document.createElement('input');
+            passwordInput.type = 'password';
+            passwordInput.id = 'password';
+            passwordInput.name = 'password';
+            passwordInput.placeholder = 'Value';
+            passwordInput.required = true;
+            passwordGroup.appendChild(passwordLabel);
+            passwordGroup.appendChild(passwordInput);
+
+            // Create submit button
+            const submitBtn = document.createElement('button');
+            submitBtn.type = 'submit';
+            submitBtn.className = 'signin-btn';
+            submitBtn.textContent = 'Sign In';
+
+            // Create links container
+            const linksContainer = document.createElement('div');
+            linksContainer.className = 'links-container';
+            const forgotLink = document.createElement('a');
+            forgotLink.href = '#';
+            forgotLink.textContent = 'Forgot password?';
+            const registerLink = document.createElement('a');
+            registerLink.href = '#';
+            registerLink.textContent = 'Register';
+            linksContainer.appendChild(forgotLink);
+            linksContainer.appendChild(registerLink);
+
+            // Assemble form
+            form.appendChild(emailGroup);
+            form.appendChild(passwordGroup);
+            form.appendChild(submitBtn);
+            form.appendChild(linksContainer);
+
+            // Assemble container
+            container.appendChild(closeBtn);
+            container.appendChild(form);
+
+            // Assemble modal
+            modal.appendChild(overlay);
+            modal.appendChild(container);
+
+            // Append to body
+            document.body.appendChild(modal);
+
+            return modal;
+        }
+
+        // Function to create the register modal HTML structure
+        function createRegisterModal() {
+            // Create modal container
+            const modal = document.createElement('div');
+            modal.className = 'register-modal';
+            modal.id = 'register-modal';
+
+            // Create overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'register-modal-overlay';
+            overlay.id = 'register-overlay';
+
+            // Create container
+            const container = document.createElement('div');
+            container.className = 'register-container';
+
+            // Create close button
+            const closeBtn = document.createElement('button');
+            closeBtn.className = 'register-close';
+            closeBtn.id = 'register-close';
+            closeBtn.innerHTML = '<i class="fas fa-times"></i>';
+
+            // Create form
+            const form = document.createElement('form');
+            form.id = 'register-form';
+
+            // Create name field
+            const nameGroup = document.createElement('div');
+            nameGroup.className = 'form-group';
+            const nameLabel = document.createElement('label');
+            nameLabel.setAttribute('for', 'register-name');
+            nameLabel.textContent = 'Name';
+            const nameInput = document.createElement('input');
+            nameInput.type = 'text';
+            nameInput.id = 'register-name';
+            nameInput.name = 'name';
+            nameInput.placeholder = 'Value';
+            nameInput.required = true;
+            nameGroup.appendChild(nameLabel);
+            nameGroup.appendChild(nameInput);
+
+            // Create surname field
+            const surnameGroup = document.createElement('div');
+            surnameGroup.className = 'form-group';
+            const surnameLabel = document.createElement('label');
+            surnameLabel.setAttribute('for', 'register-surname');
+            surnameLabel.textContent = 'Surname';
+            const surnameInput = document.createElement('input');
+            surnameInput.type = 'text';
+            surnameInput.id = 'register-surname';
+            surnameInput.name = 'surname';
+            surnameInput.placeholder = 'Value';
+            surnameInput.required = true;
+            surnameGroup.appendChild(surnameLabel);
+            surnameGroup.appendChild(surnameInput);
+
+            // Create email field
+            const emailGroup = document.createElement('div');
+            emailGroup.className = 'form-group';
+            const emailLabel = document.createElement('label');
+            emailLabel.setAttribute('for', 'register-email');
+            emailLabel.textContent = 'Email';
+            const emailInput = document.createElement('input');
+            emailInput.type = 'email';
+            emailInput.id = 'register-email';
+            emailInput.name = 'email';
+            emailInput.placeholder = 'Value';
+            emailInput.required = true;
+            emailGroup.appendChild(emailLabel);
+            emailGroup.appendChild(emailInput);
+
+            // Create mobile field
+            const mobileGroup = document.createElement('div');
+            mobileGroup.className = 'form-group';
+            const mobileLabel = document.createElement('label');
+            mobileLabel.setAttribute('for', 'register-mobile');
+            mobileLabel.textContent = 'Mobile Number';
+            const mobileInput = document.createElement('input');
+            mobileInput.type = 'tel';
+            mobileInput.id = 'register-mobile';
+            mobileInput.name = 'mobile';
+            mobileInput.placeholder = 'Value';
+            mobileInput.required = true;
+            mobileGroup.appendChild(mobileLabel);
+            mobileGroup.appendChild(mobileInput);
+
+            // Create submit button
+            const submitBtn = document.createElement('button');
+            submitBtn.type = 'submit';
+            submitBtn.className = 'register-btn';
+            submitBtn.textContent = 'Register';
+
+            // Assemble form
+            form.appendChild(nameGroup);
+            form.appendChild(surnameGroup);
+            form.appendChild(emailGroup);
+            form.appendChild(mobileGroup);
+            form.appendChild(submitBtn);
+
+            // Assemble container
+            container.appendChild(closeBtn);
+            container.appendChild(form);
+
+            // Assemble modal
+            modal.appendChild(overlay);
+            modal.appendChild(container);
+
+            // Append to body
+            document.body.appendChild(modal);
+
+            return modal;
+        }
+
+        // Initialize: Inject styles and create modals
+        injectSignInStyles();
+        const signinModal = createSignInModal();
+        const registerModal = createRegisterModal();
+
+        // Get elements
+        const profileIcon = document.getElementById('profile-icon');
+        const signinOverlay = document.getElementById('signin-overlay');
+        const signinClose = document.getElementById('signin-close');
+        const signinForm = document.getElementById('signin-form');
+
+        // Open modal when profile icon is clicked
+        if (profileIcon) {
+            profileIcon.addEventListener('click', function() {
+                signinModal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            });
+        }
+
+        // Close modal when overlay is clicked
+        signinOverlay.addEventListener('click', function() {
+            signinModal.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        });
+
+        // Close modal when close button is clicked
+        signinClose.addEventListener('click', function() {
+            signinModal.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        });
+
+        // Close modal when Escape key is pressed
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && signinModal.classList.contains('active')) {
+                signinModal.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+        });
+
+        // Handle form submission
+        signinForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add your form submission logic here
+            alert('Sign in functionality will be implemented here!');
+            // You can add actual authentication logic here
+        });
+
+        // Get register modal elements
+        const registerOverlay = document.getElementById('register-overlay');
+        const registerClose = document.getElementById('register-close');
+        const registerForm = document.getElementById('register-form');
+        const registerLink = document.querySelector('#signin-form .links-container a:last-child');
+
+        // Open register modal when Register link is clicked
+        if (registerLink) {
+            registerLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                signinModal.classList.remove('active');
+                registerModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+
+        // Close register modal when overlay is clicked
+        registerOverlay.addEventListener('click', function() {
+            registerModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close register modal when close button is clicked
+        registerClose.addEventListener('click', function() {
+            registerModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close register modal when Escape key is pressed
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && registerModal.classList.contains('active')) {
+                registerModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Handle register form submission
+        registerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add your form submission logic here
+            alert('Register functionality will be implemented here!');
+            // You can add actual registration logic here
+        });
+
+        // Cart functionality
+        let cartCount = 0;
+        const cartCountElement = document.getElementById('cart-count');
+        
+        // Function to update cart count display
+        function updateCartCount() {
+            if (cartCount > 0) {
+                cartCountElement.textContent = cartCount;
+                cartCountElement.classList.add('show');
+            } else {
+                cartCountElement.classList.remove('show');
+            }
+        }
+        
+        // Add event listeners to all "Add to Cart" buttons
+        const addToCartButtons = document.querySelectorAll('.btn-add-cart');
+        addToCartButtons.forEach(function(button) {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                cartCount++;
+                updateCartCount();
+            });
+        });
+        
+        // Initialize cart count (hide it initially)
+        updateCartCount();
+    </script>
+
+</body>
+</html>
